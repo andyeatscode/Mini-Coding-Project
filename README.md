@@ -1,2 +1,3 @@
-Hallo Welt
-Ja ihr habt richtig gehört, wir sind ein wunderbares Entwicklerteam und wir sind cool!
+# Mini Coding Project: Obletuto
+
+We are two very beautiful students just having fun coding a small project in C.
