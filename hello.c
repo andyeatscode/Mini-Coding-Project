@@ -1,1 +1,0 @@
-#define Hello 3
