@@ -2,20 +2,8 @@
 #include "map.h"
 
 int main(void){
-  
   char player_name[15], **map;
-  int i, j;
-  /*Map test*/
-  map = malloc(10 * sizeof(char));
-  for(i = 0; i < 10; ++i){
-    map[i] = malloc(10 * sizeof(char));
-  }
 
-  for(i = 0; i < 10; ++i){
-    for(j = 0; j < 10; ++j){
-      map[i][j] = '.';
-    }
-  }
 
   printf("Welcome to \n");
   printf(" _______  ______   _        _______ _________         _________ _______ \n");

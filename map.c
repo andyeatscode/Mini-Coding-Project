@@ -8,6 +8,5 @@ void print_interface(char** map, int cols, int rows)
       printf("%c ", map[i][j]);
     }
     printf("\n");
-  }
 }
 
