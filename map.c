@@ -1,5 +1,7 @@
 #include "map.h"
 
+extern int pos_x, pos_y;
+
 char** map_init(int cols, int rows)
 {
   char **map;
@@ -25,6 +27,20 @@ char** map_init(int cols, int rows)
   return map;
 }
 
+void refresh_map(char** map, int cols, int rows)
+{
+    int i, j;
+
+    for(i = 0; i < rows; ++i){
+        for(j = 0; j < cols; ++j){
+            map[i][j] = 32;
+        }
+    }
+
+    map[pos_y][pos_x] = 'P';
+
+    fill_map(map, cols, rows);
+}
 
 void print_interface(char** map, int cols, int rows)
 {

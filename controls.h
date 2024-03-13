@@ -4,10 +4,11 @@
 #include <stdio.h>
 #include <ctype.h>
 #include <string.h>
+#include "inventory.h"
 
 #define PLAYER 80
 
-void player_control(char** map, int cols, int rows);
+int player_control(char** map, int cols, int rows);
 
 
 #endif

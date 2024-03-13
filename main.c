@@ -1,13 +1,28 @@
 #include <stdlib.h>
 #include "map.h"
 #include "controls.h"
+#include "inventory.h"
 
 int pos_x, pos_y;
+inventory player_inventory;
 
 int main(void){
   char player_name[15], **map;
   int rand_x, rand_y;
   int map_rows, map_cols, input_size;
+
+
+  player_inventory.stick.amount = 0;
+  strcpy(player_inventory.stick.name, "Sticks");
+
+  player_inventory.wood.amount = 0;
+  strcpy(player_inventory.stick.name, "Wood");
+  
+  player_inventory.stone.amount = 0;
+  strcpy(player_inventory.stick.name, "Stone");
+
+  player_inventory.berry.amount = 0;
+  strcpy(player_inventory.stick.name, "Berry");
 
   printf("Welcome to \n");
   printf(" _______  ______   _        _______ _________         _________ _______ \n");
@@ -81,7 +96,20 @@ int main(void){
 
   while(1){
     print_interface(map, map_cols, map_rows);
-    player_control(map, map_cols, map_rows);
+
+    switch (player_control(map, map_cols, map_rows))
+    {
+    case -3:
+      refresh_map(map, map_cols, map_rows);
+      break;
+
+    case 0:
+      break;
+
+    default:
+      exit(1);
+      break;
+    }
   }
 
   return 0;
