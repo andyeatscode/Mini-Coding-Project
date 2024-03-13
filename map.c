@@ -1,6 +1,5 @@
 #include "map.h"
 
-
 char** map_init(int cols, int rows)
 {
   char **map;
