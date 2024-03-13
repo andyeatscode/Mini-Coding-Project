@@ -55,7 +55,7 @@ void print_interface(char** map, int cols, int rows)
 }
 
 void fill_map(char** map, int cols, int rows){
-    int stone_amount = 0, tree_amount = 0, bush_amount = 0, i, j, k, object_x = 0, object_y = 0;
+    int stone_amount = 0, tree_amount = 0, bush_amount = 0, i, object_x = 0, object_y = 0;
     double space = (double)(rows * cols);
     srand(time(NULL));
     stone_amount = rand() % ((int)(space * STONE_PERCENTAGE));
