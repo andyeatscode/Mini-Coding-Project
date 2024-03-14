@@ -90,7 +90,6 @@ int main(void){
   if ((map = map_init(map_cols, map_rows)) == NULL){
     exit(1);
   }
-
   fill_map(map, map_cols, map_rows);
 
   srand(time(NULL));
