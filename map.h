@@ -9,7 +9,6 @@
 #define TREE_TOP 79
 #define TREE_LOG -70
 #define BUSH -99
-#define MAX_INV_LEN 7
 
 #include <stdio.h>
 #include <stdlib.h>

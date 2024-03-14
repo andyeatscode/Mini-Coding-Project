@@ -4,25 +4,32 @@
 #include "inventory.h"
 
 int pos_x, pos_y;
-inventory player_inventory;
+item player_inventory[ITEM_AMOUNT];
+stats player_stats[STATS_AMOUNT];
 
 int main(void){
   char player_name[15], **map;
-  int rand_x, rand_y;
+  int rand_x, rand_y, i;
   int map_rows, map_cols, input_size;
 
+  /*Inventory*/
+  player_inventory[0].amount = 0;
+  strcpy(player_inventory[0].name, "Stick ");
 
-  player_inventory.stick.amount = 0;
-  strcpy(player_inventory.stick.name, "Sticks");
+  player_inventory[1].amount = 0;
+  strcpy(player_inventory[1].name, "Wood  ");
 
-  player_inventory.wood.amount = 0;
-  strcpy(player_inventory.stick.name, "Wood");
-  
-  player_inventory.stone.amount = 0;
-  strcpy(player_inventory.stick.name, "Stone");
+  player_inventory[2].amount = 0;
+  strcpy(player_inventory[2].name, "Stone ");
 
-  player_inventory.berry.amount = 0;
-  strcpy(player_inventory.stick.name, "Berry");
+  player_inventory[3].amount = 0;
+  strcpy(player_inventory[3].name, "Berry ");
+
+
+  /*Stats*/
+  player_stats[0].amount = 20;
+  player_stats[0].max_amount = 20;
+  strcpy(player_stats[0].name, "Health");
 
   printf("Welcome to \n");
   printf(" _______  ______   _        _______ _________         _________ _______ \n");

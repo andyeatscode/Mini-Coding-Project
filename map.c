@@ -1,6 +1,8 @@
 #include "map.h"
 
 extern int pos_x, pos_y;
+extern item player_inventory[];
+extern stats player_stats[];
 
 char** map_init(int cols, int rows)
 {
@@ -45,20 +47,47 @@ void refresh_map(char** map, int cols, int rows)
 void print_interface(char** map, int cols, int rows)
 {
     int i, j;
-
+    /*Map-Box*/
     printf("%c", 201);
     for(i = 1; i < (2 * cols) + 1; ++i){
         printf("%c", 205);
     }
     printf("%c", 187);
+
+    /*Iventory-Box*/
+    printf("%c", 201);
+    for(i = 1; i < MAX_INV_LEN + 1; ++i){
+        printf("%c", 205);
+    }
+    printf("%c", 187);
+
+    /*Stats-Box*/
+    printf("%c", 201);
+    for(i = 1; i < MAX_STAT_LEN + 1; ++i){
+        printf("%c", 205);
+    }
+    printf("%c", 187);
+
     printf("\n");
+
 
     for(i = 0; i < rows; ++i){
         printf("%c", 186);
         for(j = 0; j < cols; ++j){
             printf("%c ", map[i][j]);
         }
-        printf("%c\n", 186);
+        printf("%c", 186);
+
+        if(i < ITEM_AMOUNT){
+            printf("%c  %s\t%i  %c", 186, player_inventory[i].name, player_inventory[i].amount, 186);  
+            printf("%c", 186);
+        }
+        if(i < STATS_AMOUNT){
+            printf("  %s\t%i/%i ", player_stats[i].name, player_stats[i].amount, player_stats[i].max_amount);
+            printf("%c", 186);
+        }
+
+        printf("\n");
     }
 
     printf("%c", 200);
