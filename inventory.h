@@ -3,8 +3,13 @@
 
 #define ITEM_AMOUNT 4
 #define STATS_AMOUNT 1
-#define MAX_INV_LEN 7
-#define MAX_STAT_LEN 7
+#define MAX_INV_LEN 10
+#define MAX_STAT_LEN 10
+
+#define TREE_TOP 79
+#define TREE_LOG -70
+#define BUSH -99
+#define STONE -2
 
 typedef struct _item{
     int amount;

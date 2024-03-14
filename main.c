@@ -87,10 +87,12 @@ int main(void){
 
   printf("\n\n\n------------------------------------\nThe journey awaits you, %s!\n------------------------------------\n", player_name);
 
+
   if ((map = map_init(map_cols, map_rows)) == NULL){
     exit(1);
   }
   fill_map(map, map_cols, map_rows);
+
 
   srand(time(NULL));
   while (1) {
