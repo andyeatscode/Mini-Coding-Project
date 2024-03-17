@@ -4,9 +4,10 @@ int player_control(char** map, int cols, int rows){
     extern int pos_x, pos_y;
     extern item player_inventory[];
 
-    int i = 0, res = 0, j = 0, res_port = 0;
+    int i = 0, res = 0, j = 0, res_port = 0, n = 0;
     char input[7], checker;
-
+    
+    /*Get Input*/
     scanf("%6s", input);
 
     while (input[i] != '\0'){
@@ -14,74 +15,85 @@ int player_control(char** map, int cols, int rows){
         i++;
     }
 
+    /*Compare Input*/
     if (strcmp(input, "RIGHT") == 0 || strcmp(input, "R") == 0) {
-        if (pos_x == cols - 1) {
+        if (pos_x == cols - 2) {
             printf("You tried walking into unknown land Do you want to change the location? (y/n)\n");
             while(1) {
                 if (scanf("%c", &checker) == 1 && (checker == 'y' || checker == 'n')) break;
             }
+            /*Player Position adjusten, wenn aus Map raus*/
             if (checker == 'y') {
-                pos_x = 0;
+                pos_x = 1;
                 checker = ' '; 
                 return -3;
             }
             checker = ' '; 
+            /*Move Player*/
         } else if (map[pos_y][pos_x + 1] == ' '){
             map[pos_y][pos_x] = ' ';
             pos_x++;
             map[pos_y][pos_x] = PLAYER;
         }
     } else if (strcmp(input, "LEFT") == 0 || strcmp(input, "L") == 0) {
-        if (pos_x == 0) {
+        if (pos_x == 1) {
             printf("You tried walking into unknown land Do you want to change the location? (y/n)\n");
             while(1) {
                 if (scanf("%c", &checker) == 1 && (checker == 'y' || checker == 'n')) break;
             }
+            /*Player Position adjusten, wenn aus Map raus*/
             if (checker == 'y') {
-                pos_x = cols - 1;
+                pos_x = cols - 2;
                 checker = ' '; 
                 return -3;
             }
             checker = ' '; 
+            /*Move Player*/
         } else if (map[pos_y][pos_x - 1] == ' '){
             map[pos_y][pos_x] = ' ';
             pos_x--;
             map[pos_y][pos_x] = PLAYER;
         }
     } else if (strcmp(input, "UP") == 0 || strcmp(input, "U") == 0) {
-        if (pos_y == 0) {
+        if (pos_y == 1) {
             printf("You tried walking into unknown land Do you want to change the location? (y/n)\n");
             while(1) {
                 if (scanf("%c", &checker) == 1 && (checker == 'y' || checker == 'n')) break;
             }
+            /*Player Position adjusten, wenn aus Map raus*/
             if (checker == 'y') {
-                pos_y = rows - 1;
+                pos_y = rows - 2;
                 checker = ' '; 
                 return -3;
             }
             checker = ' '; 
+            /*Move Player*/
         } else if (map[pos_y - 1][pos_x] == ' ') {
             map[pos_y][pos_x] = ' ';
             pos_y--;
             map[pos_y][pos_x] = PLAYER;
         }
     } else if (strcmp(input, "DOWN") == 0 || strcmp(input, "D") == 0) {
-        if (pos_y == rows - 1) {
+        if (pos_y == rows - 2) {
             printf("You tried walking into unknown land Do you want to change the location? (y/n)\n");
             while(1) {
                 if (scanf("%c", &checker) == 1 && (checker == 'y' || checker == 'n')) break;
             }
+            /*Player Position adjusten, wenn aus Map raus*/
             if (checker == 'y') {
-                pos_y = 0;
+                pos_y = 1;
                 checker = ' '; 
                 return -3;
             }
-            checker = ' '; 
+            checker = ' ';
+            /*Move Player*/
         } else if (map[pos_y + 1][pos_x] == ' '){
             map[pos_y][pos_x] = ' ';
             pos_y++;
             map[pos_y][pos_x] = PLAYER;
         }
+
+    /*--------------- Gathering Function ---------------*/
     } else if (strcmp(input, "GATHER") == 0) {
         printf("What are you looking for?\n");
         while(1){
@@ -107,21 +119,69 @@ int player_control(char** map, int cols, int rows){
             res = 0;
         }
 
+        /*Checks in a 3 x 3 square*/
         if(res != 0){
             for(i = -1; i < 2; ++i){
                 for(j = -1; j < 2; ++j){
                     if(map[pos_y + i][pos_x + j] == res){
-                        player_inventory[res_port].amount++;
+
+                        break;
+                        /*
+                        if (res == TREE_LOG)  || res == TREE_TOP) {
+                            map[pos_y + i][pos_x + j] = ' ';
+                            player_inventory[res_port].amount++;
+
+                            if (map[pos_y + i][pos_x + j + 1] == TREE_LOG) {
+                                map[pos_y + i][pos_x + j + 1] = ' ';
+                                player_inventory[res_port].amount++;
+                            }
+
+                            if (map[pos_y + i][pos_x + j - 1] == TREE_LOG) {
+                                map[pos_y + i][pos_x + j - 1] = ' ';
+                                player_inventory[res_port].amount++;
+                            }
+                        } else {
+                            map[pos_y + i][pos_x + j] = ' ';
+                            player_inventory[res_port].amount++;
+                        }
+
                         goto end;
+                        */
                     }
                 }
+                if(map[pos_y + i][pos_x + j] == res){
+                    
+                    /*If Tree, destroy Tree*/
+                    if(res == TREE_LOG){
+                        n = 0;
+                        while(map[pos_y + i - n][pos_x + j] != TREE_TOP){
+                            map[pos_y + i - n][pos_x + j] = ' ';
+                            player_inventory[res_port].amount++;
+                            n++;
+                        }
+                        map[pos_y + i - n][pos_x + j] = ' ';
+                        player_inventory[0].amount++;
+                        n = 1;
+                        while(map[pos_y + i + n][pos_x + j] == TREE_LOG){
+                            map[pos_y + i + n][pos_x + j] = ' ';
+                            player_inventory[res_port].amount++;
+                            ++n;
+                        }
+                    }
+                    else{
+                        map[pos_y + i][pos_x + j] = ' ';
+                        player_inventory[res_port].amount++;
+                    }
+                    break;
+                }
             }
+        } else {
+            printf("Material not found!\n");
         }
-        printf("Material not found!\n");
+        
     
     } else {
         printf("Invalid move, please try again!\n");
     }
-    end:
     return 0;
 }

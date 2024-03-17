@@ -7,6 +7,14 @@ int pos_x, pos_y;
 item player_inventory[ITEM_AMOUNT];
 stats player_stats[STATS_AMOUNT];
 
+/*
+ToDo:
+- Statscreen fix
+- Dungeon spawn on map
+- Dungeon enter
+
+*/
+
 int main(void){
   char player_name[15], **map;
   int rand_x, rand_y, i;
@@ -27,10 +35,28 @@ int main(void){
 
 
   /*Stats*/
-  player_stats[0].amount = 20;
-  player_stats[0].max_amount = 20;
-  strcpy(player_stats[0].name, "Health");
+  player_stats[0].amount = 1;
+  player_stats[0].max_amount = 100;
+  strcpy(player_stats[0].name, "Level");
 
+  player_stats[1].amount = 0;
+  player_stats[1].max_amount = 10;
+  strcpy(player_stats[1].name, "EXP");
+  
+  player_stats[2].amount = 20;
+  player_stats[2].max_amount = 20;
+  strcpy(player_stats[2].name, "Health");
+  
+  player_stats[3].amount = 2;
+  player_stats[3].max_amount = 0;
+  strcpy(player_stats[3].name, "Attack");
+
+  player_stats[4].amount = 2;
+  player_stats[4].max_amount = 0;
+  strcpy(player_stats[4].name, "Defense");
+
+
+  /*Game Start*/
   printf("Welcome to \n");
   printf(" _______  ______   _        _______ _________         _________ _______ \n");
   printf("(  ___  )(  ___ \\ ( \\      (  ____ \\__   __/|\\     /|\\__   __/(  ___  )\n");
@@ -49,6 +75,7 @@ int main(void){
   while(1) {
     printf("How large is your map?\n1. Small\n2. Medium\n3. Large\n4. Custom\n");
     if (scanf("%i", &input_size) == 1 && input_size > 0 && input_size < 5) break;
+    while (getchar() != '\n');
     printf("Oh no, something went wrong, please contact micorsoft tech sopport! :)\n");
   }
 
@@ -93,11 +120,11 @@ int main(void){
   }
   fill_map(map, map_cols, map_rows);
 
-
+  /*Player Spawn*/
   srand(time(NULL));
   while (1) {
-    pos_x = rand_x = rand() % map_cols;
-    pos_y = rand_y = rand() % map_rows;
+    pos_x = rand_x = 1 + rand() % (map_cols - 2);
+    pos_y = rand_y = 1 + rand() % (map_rows - 2);
     if (map[pos_y][pos_x] == ' ') break;
   }
   map[rand_y][rand_x] = PLAYER;

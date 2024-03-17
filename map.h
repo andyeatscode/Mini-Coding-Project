@@ -3,7 +3,7 @@
 
 #define PLAYER 80
 #define STONE_PERCENTAGE 0.10
-#define TREE_PERCENTAGE 0.15
+#define TREE_PERCENTAGE 0.10
 #define BUSH_PERCENTAGE 0.10
 
 #include <stdio.h>
