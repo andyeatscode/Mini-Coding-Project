@@ -138,7 +138,6 @@ void fill_map(char** map, int cols, int rows){
         }
     }
     
-    
     for(i = 0; i < stone_amount; ++i){
         object_x = 1 + rand() % (cols - 1);
         object_y = 1 + rand() % (rows - 1);
