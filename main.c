@@ -17,8 +17,10 @@ ToDo:
 
 int main(void){
   char player_name[15], **map;
-  int rand_x, rand_y, i;
+  int rand_x, rand_y, i = 0;
   int map_rows, map_cols, input_size;
+
+  i = i;
 
   /*Inventory*/
   player_inventory[0].amount = 0;
@@ -54,7 +56,6 @@ int main(void){
   player_stats[4].amount = 2;
   player_stats[4].max_amount = 0;
   strcpy(player_stats[4].name, "Defense");
-
 
   /*Game Start*/
   printf("Welcome to \n");
@@ -128,9 +129,11 @@ int main(void){
     if (map[pos_y][pos_x] == ' ') break;
   }
   map[rand_y][rand_x] = PLAYER;
-
+  i = 1;
   while(1){
-    print_interface(map, map_cols, map_rows);
+
+    if(i == -1)print_interface(map, map_cols, map_rows);
+    if(i == -2)print_dungeon(map, map_cols, map_rows);
 
     switch (player_control(map, map_cols, map_rows))
     {
@@ -139,6 +142,10 @@ int main(void){
       break;
 
     case 0:
+      break;
+    
+    case SWITCH:
+      i = 
       break;
 
     default:

@@ -11,6 +11,8 @@
 #define BUSH -99
 #define STONE -2
 
+#define DUNGEON_PERCENTAGE 0.8
+
 typedef struct _item{
     int amount;
     char name[MAX_INV_LEN];

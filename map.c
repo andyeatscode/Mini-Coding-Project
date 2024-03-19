@@ -121,7 +121,7 @@ void print_interface(char** map, int cols, int rows)
 }
 
 void fill_map(char** map, int cols, int rows){
-    int stone_amount = 0, tree_amount = 0, bush_amount = 0, i, object_x = 0, object_y = 0, map_type = 0;
+    int stone_amount = 0, tree_amount = 0, bush_amount = 0, i = 0, object_x = 0, object_y = 0, map_type = 0;
     double space = (double)(rows * cols);
     srand(time(NULL));
 
@@ -175,6 +175,23 @@ void fill_map(char** map, int cols, int rows){
     }
 
     
+    if((rand() % 101) < (int)(DUNGEON_PERCENTAGE * 100)){
+        while (1) {
+            object_x = 1 + rand() % (cols - 1);
+            object_y = 1 + rand() % (rows - 1);
+            if(map[object_y][object_x] == 32 && map[object_y - 1][object_x] == 32 && map[object_y][object_x - 1] == 32 && map[object_y - 1][object_x - 1] == 32){
+               /*Rechts unten*/
+               map[object_y][object_x] = -68;
+               /*Rechts oben*/
+               map[object_y - 1][object_x] = -69;
+               /*Unten Links*/
+               map[object_y][object_x - 1] = -56;
+               /*Oben Links*/
+               map[object_y - 1][object_x - 1] = -55;
+               break;
+            }
+        }
+    }
 
 
     for(i = 0; i < tree_amount; ++i){
