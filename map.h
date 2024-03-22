@@ -15,5 +15,6 @@ void print_interface(char** map, int cols, int rows);
 char** map_init(int rows, int cols);
 void fill_map(char** map, int rows, int cols);
 void refresh_map(char** map, int cols, int rows);
+void init_dungeon(char** map, int cols, int rows);
 
 #endif

@@ -9,6 +9,7 @@
 #define PLAYER 80
 
 int player_control(char** map, int cols, int rows);
+int player_control_dungeon(char** map, int cols, int rows);
 
 
 #endif

@@ -45,6 +45,107 @@ void refresh_map(char** map, int cols, int rows)
     fill_map(map, cols, rows);
 }
 
+void init_dungeon(char** map, int cols, int rows)
+{
+    int i, j, way_height, way_width;
+    way_height = (int)((rows) * 0.3);
+    way_width = (int)((cols) * 0.3);
+
+    /*
+    XX|    |X
+    ---    --
+     
+    ---    --
+    XX|    |X
+    */
+
+    for(i = 0; i < rows; ++i){
+        for(j = 0; j < cols; ++j){
+            map[i][j] = '.';
+        }
+    }
+
+    /*Horizontaler Schnitt*/
+    for (i = way_height + 1; i < (way_height + 1) * 2; ++i){
+        for(j = 0; j < cols; j++) {
+            map[i][j] = 32;
+        }
+    }
+
+    /*Vertikaler schnitt*/
+    for (i = way_width + 1; i < (way_width + 1) * 2; ++i){
+        for(j = 0; j < rows; j++) {
+            map[j][i] = 32;
+        }
+    }
+
+    map[rows - 2][(int)(0.5 * cols)] = 'P';
+    pos_x = (int)(0.5 * cols);
+    pos_y = rows - 2;
+
+}
+
+void create_dungeonroom(char** map, int cols, int rows, char direction)
+{
+    /*Direction defines where the playercame from i.e. d means he exited the last room in the up direction*/
+    int i, j;
+    char new_dir;
+    i = rand() % 3;
+    switch (direction) {
+        case 'u':
+            map[0 + 2][(int)(0.5 * cols)] = 'P';
+            pos_x = (int)(0.5 * cols);
+            pos_y = rows - 2;
+
+            if(i == 0) new_dir = 'r';
+            if(i == 1) new_dir = 'l';
+            if(i == 2) new_dir = 'd';
+            break;
+            
+        case 'r':
+            map[(int)(0.5 * rows)][cols - 2] = 'P';
+            pos_x = (int)(0.5 * cols);
+            pos_y = rows - 2;
+
+            if(i == 0) new_dir = 'l';
+            if(i == 1) new_dir = 'u';
+            if(i == 2) new_dir = 'd';
+            break;
+
+        case 'l':
+            map[(int)(0.5 * rows)][0 + 2] = 'P';
+            pos_x = (int)(0.5 * cols);
+            pos_y = rows - 2;
+            
+            if(i == 0) new_dir = 'r';
+            if(i == 1) new_dir = 'u';
+            if(i == 2) new_dir = 'd';
+            break;
+            
+        case 'd':
+            map[rows - 2][(int)(0.5 * cols)] = 'P';
+            pos_x = (int)(0.5 * cols);
+            pos_y = rows - 2;
+            
+            if(i == 0) new_dir = 'r';
+            if(i == 1) new_dir = 'u'; 
+            if(i == 2) new_dir = 'l';
+            break;
+        default:
+            exit(1);
+    }
+
+    /*
+    XXX              - - ----
+                   >>>>>>>>>>>>>>
+                   --- -----|v|
+    X|-
+    XPX
+    */
+
+}
+
+
 void print_interface(char** map, int cols, int rows)
 {
     int i, j;

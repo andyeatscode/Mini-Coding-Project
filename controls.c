@@ -96,6 +96,7 @@ int player_control(char** map, int cols, int rows){
         n = 0;
         for(i = -1; i < 2; ++i){
             for(j = -1; j < 2; ++j){
+                /*Checks for dungeon Tiles around player*/
                 if(map[pos_y + i][pos_x + j] == -55 || map[pos_y + i][pos_x + j] == -56 || map[pos_y + i][pos_x + j] == -68 || map[pos_y + i][pos_x + j] == -69){
                     n = 1;
                     break;
@@ -116,6 +117,7 @@ int player_control(char** map, int cols, int rows){
             if (checker == 'y') {
                 /*Do sth*/
                 printf("LEts gooooo yeeeeeeeeeetttttttttttttt\n");
+                return -4;
             } else {
                 printf("You run away\n");
             }
@@ -198,7 +200,7 @@ int player_control_dungeon(char** map, int cols, int rows){
     extern int pos_x, pos_y;
     extern item player_inventory[];
 
-    int i = 0, res = 0, j = 0, res_port = 0, n = 0;
+    int i = 0, j = 0;
     char input[7], checker;
     
     /*Get Input*/
@@ -220,7 +222,7 @@ int player_control_dungeon(char** map, int cols, int rows){
             if (checker == 'y') {
                 pos_x = 1;
                 checker = ' '; 
-                return -3;
+                return -4;
             }
             checker = ' '; 
             /*Move Player*/
@@ -239,7 +241,7 @@ int player_control_dungeon(char** map, int cols, int rows){
             if (checker == 'y') {
                 pos_x = cols - 2;
                 checker = ' '; 
-                return -3;
+                return -4;
             }
             checker = ' '; 
             /*Move Player*/
@@ -258,7 +260,7 @@ int player_control_dungeon(char** map, int cols, int rows){
             if (checker == 'y') {
                 pos_y = rows - 2;
                 checker = ' '; 
-                return -3;
+                return -4;
             }
             checker = ' '; 
             /*Move Player*/
@@ -277,7 +279,7 @@ int player_control_dungeon(char** map, int cols, int rows){
             if (checker == 'y') {
                 pos_y = 1;
                 checker = ' '; 
-                return -3;
+                return -4;
             }
             checker = ' ';
             /*Move Player*/
@@ -289,5 +291,5 @@ int player_control_dungeon(char** map, int cols, int rows){
     } else {
         printf("Invalid move, please try again!\n");
     }
-    return 0;
+    return -5;
 }

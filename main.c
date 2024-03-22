@@ -87,7 +87,7 @@ int main(void){
     map_cols = 15;
     break;
     
-  case 2:;
+  case 2:
     map_rows = 20;
     map_cols = 30;
     break;
@@ -129,23 +129,30 @@ int main(void){
     if (map[pos_y][pos_x] == ' ') break;
   }
   map[rand_y][rand_x] = PLAYER;
-  i = 1;
+  i = 0;
   while(1){
-
-    if(i == -1)print_interface(map, map_cols, map_rows);
-    if(i == -2)print_dungeon(map, map_cols, map_rows);
-
-    switch (player_control(map, map_cols, map_rows))
+    printf("New Loop: i = %i\n", i);
+    
+    switch (i)
     {
     case -3:
       refresh_map(map, map_cols, map_rows);
+      i = 0;
       break;
 
     case 0:
+      print_interface(map, map_cols, map_rows);
+      i = player_control(map, map_cols, map_rows);
       break;
     
-    case SWITCH:
-      i = 
+    case -4:
+      init_dungeon(map, map_cols, map_rows);
+      i = -5;
+      break;
+    
+    case -5:
+      print_interface(map, map_cols, map_rows);
+      i = player_control_dungeon(map, map_cols, map_rows);
       break;
 
     default:
